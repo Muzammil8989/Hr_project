@@ -2,70 +2,80 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 body {
   font-family: "Montserrat", sans-serif;
 }
+
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 241 82% 17%;
+    --background: 240, 100%, 98%; /* Light background (off-white) */
+    --foreground: 240, 10%, 15%; /* Dark text */
 
-    --card: 0 0% 100%;
-    --card-foreground: 241 82% 17%;
+    --card: 255, 255, 255; /* White card */
+    --card-foreground: 240, 10%, 15%; /* Dark text for cards */
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 241 82% 17%;
+    --popover: 255, 255, 255; /* White popover */
+    --popover-foreground: 240, 10%, 15%; /* Dark text for popover */
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 205, 70%, 40%; /* Attractive teal */
+    --primary-foreground: 255, 255, 255; /* White text for primary buttons */
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 241 82% 17%;
+    --secondary: 330, 70%, 50%; /* Warm coral */
+    --secondary-foreground: 255, 255, 255; /* White text for secondary */
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 210, 20%, 95%; /* Light gray for muted elements */
+    --muted-foreground: 240, 10%, 20%; /* Dark text for muted areas */
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 50, 100%, 50%; /* Bright yellow for accents */
+    --accent-foreground: 240, 10%, 15%; /* Dark text for accent buttons */
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0, 85%, 50%; /* Bright red for destructive actions */
+    --destructive-foreground: 255, 255, 255; /* White text for destructive actions */
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --border: 220, 20%, 90%; /* Light border color */
+    --input: 240, 10%, 95%; /* Light input background */
+    --ring: 205, 70%, 50%; /* Ring color matching primary */
 
-    --radius: 0.5rem;
+    --radius: 0.5rem; /* Border radius */
   }
 
   .dark {
-    --background: 241 82% 17%;
-    --foreground: 210 40% 98%;
+    /* Apply gradient background to body for dark mode */
+    body {
+      background: hsla(280, 95%, 57%, 1); /* Fallback background */
+      background: linear-gradient(225deg, hsla(280, 95%, 57%, 1) 0%, hsla(193, 90%, 55%, 1) 100%); /* Gradient background */
+      background: -moz-linear-gradient(225deg, hsla(280, 95%, 57%, 1) 0%, hsla(193, 90%, 55%, 1) 100%); /* Firefox gradient */
+      background: -webkit-linear-gradient(deg, hsla(280, 95%, 57%, 1) 0%, hsla(193, 90%, 55%, 1) 100%); /* Safari and Chrome gradient */
+      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#B429F9", endColorstr="#26C5F3", GradientType=1); /* IE gradient filter */
+    }
 
-    --card: 241 82% 17%;
-    --card-foreground: 210 40% 98%;
+    --foreground: 210, 80%, 90%; /* Light text */
 
-    --popover: 241 82% 17%;
-    --popover-foreground: 210 40% 98%;
+    --card: 210, 30%, 25%; /* Dark card with bluish tint */
+    --card-foreground: 210, 80%, 90%; /* Light text for dark cards */
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --popover: 210, 30%, 25%; /* Dark popover with bluish tint */
+    --popover-foreground: 210, 80%, 90%; /* Light text for popover */
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --primary: 200, 100%, 60%; /* Bluish teal for primary in dark mode */
+    --primary-foreground: 255, 255, 255; /* White text for primary buttons */
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --secondary: 270, 100%, 60%; /* Light blue for secondary in dark mode */
+    --secondary-foreground: 210, 80%, 90%; /* Light text for secondary */
 
-    --accent: 241 82% 30%;
-    --accent-foreground: 210 40% 98%;
+    --muted: 210, 20%, 30%; /* Dark muted background */
+    --muted-foreground: 210, 80%, 90%; /* Light text for muted areas */
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --accent: 50, 100%, 60%; /* Bright yellow for accents in dark mode */
+    --accent-foreground: 210, 30%, 10%; /* Dark text for accent buttons */
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --destructive: 0, 80%, 50%; /* Dark red for destructive actions */
+    --destructive-foreground: 210, 80%, 90%; /* Light text for destructive actions */
+
+    --border: 210, 40%, 30%; /* Dark border color */
+    --input: 210, 30%, 20%; /* Dark input background */
+    --ring: 200, 100%, 60%; /* Light ring color matching primary */
   }
 }
 
