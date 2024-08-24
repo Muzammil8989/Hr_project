@@ -1,6 +1,8 @@
 const express = require("express");
 const connectDB = require("./config/dbConfig");
-const Routes = require("./routes/routes");
+const userRoutes = require("./routes/jobRoutes");
+const jobRoutes = require("./routes/userRoutes");
+
 const cors = require("cors");
 const dotenv = require("dotenv");
 
@@ -18,7 +20,7 @@ app.use(cors());
 app.use(express.json({ extended: false }));
 
 // Routes
-app.use("/api", Routes);
+app.use("/api", jobRoutes, userRoutes);
 
 // Error handling middleware
 app.use((err, req, res, next) => {

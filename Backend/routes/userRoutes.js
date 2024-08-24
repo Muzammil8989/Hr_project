@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { check } = require("express-validator");
+
 const {
   register,
   verifyEmail,
@@ -8,6 +9,7 @@ const {
   forgetPassword,
   resetPassword,
 } = require("../controllers/authController");
+const { } = require("../controllers/jobpostedController");
 const auth = require("../middleware/auth");
 
 // @route POST api/auth/register
