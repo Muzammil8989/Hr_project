@@ -1,56 +1,139 @@
-import React from "react";
+import React, { useState } from "react";
 import JobCard from "../../components/my_component/jobsCard/jobCard";
+import { jobs, statusCards } from "@/fakeData/jobData"; // Adjust the path as necessary
+import { Modal } from "antd";
+import { Button } from "@/components/ui/button";
+import SearchBar from "@/components/my_component/searchBar/searchBar";
+import StatusCard from "@/components/my_component/statusCard/statusCard";
+import TimeDate from "@/components/my_component/TimeDate/timedate";
+import {
+  AiOutlineCheckCircle,
+  AiOutlineClockCircle,
+  AiOutlineCloseCircle,
+} from "react-icons/ai";
 
-function Dashboard() {
-  const jobs = [
-    {
-      name: "Frontend Developer",
-      company: "Tech Corp",
-      logo: "https://via.placeholder.com/50",
-      candidates: 42,
-      location: "Remote",
-      description: "A great job for a great developer.",
-    },
-    {
-      name: "Backend Developer",
-      company: "DataSoft",
-      logo: "https://via.placeholder.com/50",
-      candidates: 30,
-      location: "Onsite",
-      description: "Looking for experienced backend developers.",
-    },
-    {
-      name: "Full Stack Developer",
-      company: "Tech Corp",
-      logo: "https://via.placeholder.com/50",
-      candidates: 20,
-      location: "Remote",
-      description: "A great job for a great developer.",
-    },
-    {
-      name: "DevOps Engineer",
-      company: "DataSoft",
-      logo: "https://via.placeholder.com/50",
-      candidates: 15,
-      location: "Onsite",
-      description: "Looking for experienced backend developers.",
-    },
-    // Add more job objects here
-  ];
+function Dashboard({ isSidebarCollapsed }) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalContent, setModalContent] = useState("");
+  const [searchQuery, setSearchQuery] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 3; // Number of job cards per page
+
+  const showModal = (content) => {
+    setModalContent(content);
+    setIsModalOpen(true);
+  };
+
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
+  // Define a mapping for icons based on the title
+  const iconMapping = {
+    Success: AiOutlineCheckCircle,
+    Pending: AiOutlineClockCircle,
+    Failed: AiOutlineCloseCircle,
+  };
+
+  // Filter jobs based on searchQuery
+  const filteredJobs = jobs.filter((job) =>
+    job.title.toLowerCase().includes(searchQuery.toLowerCase()),
+  );
+
+  // Pagination Logic
+  const totalItems = filteredJobs.length;
+  const totalPages = Math.ceil(totalItems / itemsPerPage);
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const currentJobs = filteredJobs.slice(startIndex, startIndex + itemsPerPage);
+
+  const goToNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const goToPreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const goToPage = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
 
   return (
-    <div className=" container mx-auto p-8 md:p-16 lg:p-24"> {/* Adjusted padding for better responsiveness */}
-      <h1 className="text-3xl font-bold mb-4">Dashboard</h1>
-      <hr className="mb-4 dark:border-gray-300 border-blue-600" />
-      <h2 className="text-2xl font-semibold mb-4">Jobs</h2>
-
-      {/* Using grid with auto-fill for dynamic spacing */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {jobs.map((job, index) => (
-          <JobCard key={index} job={job} />
-        ))}
+    <>
+      <div className="flex items-center justify-between">
+        <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+        <TimeDate />
       </div>
-    </div>
+      <div className="grid grid-cols-1 gap-4 px-4 py-4 sm:grid-cols-2 md:grid-cols-3 md:px-8">
+        {statusCards.map((card, index) => {
+          const Icon = iconMapping[card.title];
+          return (
+            <StatusCard
+              key={index}
+              title={card.title}
+              percentage={card.percentage}
+              color={card.color}
+              icon={Icon}
+            />
+          );
+        })}
+      </div>
+      <div className="flex flex-wrap justify-center gap-3 px-4 md:px-8">
+        {currentJobs.map((job, index) => (
+          <JobCard
+            key={index}
+            job={job}
+            showModal={showModal}
+            isSidebarCollapsed={isSidebarCollapsed}
+          />
+        ))}
+
+        <Modal
+          open={isModalOpen}
+          onOk={handleOk}
+          onCancel={handleCancel}
+          footer={null}
+        >
+          <p>{modalContent}</p>
+          <Button
+            className="animate__animated animate__fadeIn animate__delay-1s mt-4 bg-red-600 text-white hover:bg-red-700"
+            onClick={handleCancel}
+            danger
+          >
+            Cancel
+          </Button>
+        </Modal>
+      </div>
+
+      {/* Pagination Controls */}
+      <div className="mt-2 flex items-center justify-center">
+        <Button onClick={goToPreviousPage} disabled={currentPage === 1}>
+          Previous
+        </Button>
+        <div className="mx-4 flex gap-2">
+          {Array.from({ length: totalPages }, (_, i) => (
+            <Button
+              key={i + 1}
+              onClick={() => goToPage(i + 1)}
+              className={currentPage === i + 1 ? "bg-blue-500 text-white" : ""}
+            >
+              {i + 1}
+            </Button>
+          ))}
+        </div>
+        <Button onClick={goToNextPage} disabled={currentPage === totalPages}>
+          Next
+        </Button>
+      </div>
+    </>
   );
 }
 

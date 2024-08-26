@@ -2,6 +2,10 @@ const mongoose = require("mongoose");
 
 const JobSchema = new mongoose.Schema(
   {
+    company_logo: {
+      type: String,
+      required: true,
+    },
     title: {
       type: String,
       required: true,

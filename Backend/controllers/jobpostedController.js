@@ -12,6 +12,7 @@ const createJob = async (req, res) => {
   try {
     // Create a new job posting
     const newJob = new JobPosted({
+      company_logo,
       title,
       description,
       company,
@@ -33,24 +34,24 @@ const createJob = async (req, res) => {
 
 // Fetch all job postings
 const getAllJobs = async (req, res) => {
-    try {
-      const jobs = await JobPosted.find({}).populate("postedBy");
-  
-      // Map over jobs to set postedBy to null
-      const modifiedJobs = jobs.map(job => {
-        return {
-          ...job.toObject(), // Convert mongoose document to plain object
-          postedBy: null // Set postedBy to null
-        };
-      });
-  
-      res.status(200).json(modifiedJobs);
-    } catch (err) {
-      console.error(err);
-      res.status(500).json({ error: "An error occurred while fetching jobs." });
-    }
-  };
-  
+  try {
+    const jobs = await JobPosted.find({}).populate("postedBy");
+
+    // Map over jobs to set postedBy to null
+    const modifiedJobs = jobs.map((job) => {
+      return {
+        ...job.toObject(), // Convert mongoose document to plain object
+        postedBy: null, // Set postedBy to null
+      };
+    });
+
+    res.status(200).json(modifiedJobs);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "An error occurred while fetching jobs." });
+  }
+};
+
 // Fetch a single job posting by ID
 const getJobById = async (req, res) => {
   const { id } = req.params;
@@ -72,12 +73,13 @@ const getJobById = async (req, res) => {
 // Update a job posting
 const updateJob = async (req, res) => {
   const { id } = req.params;
-  const { title, description, company, location, salary } = req.body;
+  const { company_logo, title, description, company, location, salary } =
+    req.body;
 
   try {
     const job = await JobPosted.findByIdAndUpdate(
       id,
-      { title, description, company, location, salary },
+      { company_logo, title, description, company, location, salary },
       { new: true }
     );
 

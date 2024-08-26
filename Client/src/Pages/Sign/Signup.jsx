@@ -105,7 +105,7 @@ function SignUp() {
               >
                 <div className="space-y-2 text-center">
                   <h1 className="b text-3xl font-bold">Create a new account</h1>
-                  <p className="text-gray-400">
+                  <p className="text-gray-600">
                     Enter your credentials to access your account.
                   </p>
                 </div>

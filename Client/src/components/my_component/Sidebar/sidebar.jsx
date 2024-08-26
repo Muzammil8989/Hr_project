@@ -1,14 +1,11 @@
 import React, { useState } from "react";
-import {
-  FaBriefcase,
-  FaTachometerAlt,
-  FaCog,
-} from "react-icons/fa";
+import { FaBriefcase, FaTachometerAlt, FaCog } from "react-icons/fa";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import { Button } from "@/components/ui/button";
 import { Menu } from "antd";
 import Dashboard from "@/Pages/Dashboard/Dashboard";
-import { motion } from "framer-motion"; // Import motion
+import JobCard from "../jobsCard/jobCard"; // Import JobCard
+import { motion } from "framer-motion";
 
 const items = [
   {
@@ -46,7 +43,7 @@ function Sidebar() {
       case "1":
         return <Dashboard />;
       case "2":
-        return <Dashboard />;
+        return <JobCard isSidebarCollapsed={collapsed} />; // Pass the collapsed state
       case "3":
         return <Dashboard />;
       case "4":
@@ -59,23 +56,24 @@ function Sidebar() {
   return (
     <div className="flex h-screen">
       <motion.div
-        className={`rounded-br-sm rounded-tr-sm bg-[#4431af] p-4`}
-        initial={{ width: 64 }} // Initial width for collapsed state
-        animate={{ width: collapsed ? 64 : 256 }} // Expand or collapse
-        transition={{ type: "spring", stiffness: 100, damping: 30 }} // Slower animation
+        className="rounded-br-sm rounded-tr-sm bg-[#4431af] p-4"
+        initial={{ width: 64 }}
+        animate={{ width: collapsed ? 64 : 256 }}
+        transition={{ type: "spring", stiffness: 100, damping: 30 }}
       >
-        <div className="flex items-center mt-6 justify-center space-x-4">
+        <div className="mt-6 flex items-center justify-center space-x-4">
           <img
             src="https://flowbite.com/docs/images/logo.svg"
             className="h-8"
             alt="Flowbite Logo"
           />
-          <span className={`text-2xl text-white/80 ${collapsed ? "hidden" : "block"}`}>
+          <span
+            className={`text-2xl text-white/80 ${collapsed ? "hidden" : "block"}`}
+          >
             Hr System
           </span>
         </div>
-        
-        {/* Added padding for vertical spacing */}
+
         <div className="py-4">
           <Menu
             defaultSelectedKeys={["1"]}
@@ -87,18 +85,22 @@ function Sidebar() {
               icon: (
                 <div
                   className="py-2"
-                  style={{ fontSize: "1.5rem", color: "#09084f" }}
+                  style={{ fontSize: "1rem", color: "#09084f" }}
                 >
                   {item.icon}
                 </div>
               ),
               label: (
-                <span className={`text-lg font-semibold ${collapsed ? "text-white" : "#09084f"}`}>
+                <span
+                  className={`text-lg font-semibold ${
+                    collapsed ? "text-white" : "#09084f"
+                  }`}
+                >
                   {item.label}
                 </span>
               ),
             }))}
-            className="mt-10 h-[720px] rounded-lg bg-[#7e51d1] p-2 text-white"
+            className="mt-3 h-[520px] rounded-lg bg-[#7e51d1] p-2 text-white"
           />
         </div>
       </motion.div>
@@ -106,17 +108,17 @@ function Sidebar() {
         <Button
           variant="outline"
           onClick={toggleCollapsed}
-          className="-mt-2 ml-5 text-xl flex items-center dark:bg-[#7e51d1]"
+          className="-mt-2 ml-5 flex items-center text-xl dark:bg-[#7e51d1]"
         >
           {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
         </Button>
       </div>
       <motion.div
         className="rounded-lg shadow"
-        initial={{ opacity: 0 }} // Initial opacity for content
-        animate={{ opacity: 1 }} // Fade in effect
-        exit={{ opacity: 0 }} // Fade out effect
-        transition={{ duration: 0.5 }} // Duration for fade effects
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.5 }}
       >
         {renderContent()}
       </motion.div>

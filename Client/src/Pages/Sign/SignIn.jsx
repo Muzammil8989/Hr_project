@@ -89,10 +89,6 @@ function SignIn() {
     if (!userType) {
       newErrors.userType = "Please select user type";
       valid = false;
-    } else if (userType === "Candidate") {
-      navigate("/Candidate");
-    } else if (userType === "Hr") {
-      navigate("/Hr");
     }
 
     setErrors(newErrors);
@@ -113,15 +109,15 @@ function SignIn() {
           localStorage.setItem("tokenTimestamp", Date.now());
           if (userType === "Candidate") {
             navigate("/Candidate");
-          } else if (userType === "Hr") {
+          } else if (userType === "Recruiter") {
             navigate("/Hr");
           }
         })
         .catch((err) => {
           console.error(err);
           const errorMessage =
-            err?.response?.data?.message ||
-            err?.message ||
+            err?.response?.data?.msg ||
+            err?.msg ||
             "Failed to log in. Please try again.";
           toast.error(errorMessage);
         });
@@ -157,7 +153,7 @@ function SignIn() {
               >
                 <div className="space-y-2 text-center">
                   <h1 className="text-3xl font-bold">Welcome Back</h1>
-                  <p className="text-gray-400">
+                  <p className="text-gray-600">
                     Enter your credentials to access your account.
                   </p>
                 </div>

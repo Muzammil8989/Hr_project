@@ -23,11 +23,11 @@ function Design() {
         id="tsparticles"
         particlesLoaded={particlesLoaded}
         options={{
-        //   background: {
-        //     // color: {
-        //     //   value: "#0d47a1",
-        //     // },
-        //   },
+          //   background: {
+          //     // color: {
+          //     //   value: "#0d47a1",
+          //     // },
+          //   },
           fpsLimit: 60,
           interactivity: {
             events: {
@@ -62,10 +62,10 @@ function Design() {
           },
           particles: {
             color: {
-              value: "#2563eb",
+              value: "#2563ee",
             },
             links: {
-              color: "#2563eb",
+              color: "#2563ee",
               distance: 150,
               enable: true,
               opacity: 0.5,

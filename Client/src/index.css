@@ -10,13 +10,13 @@ body {
 @layer base {
   :root {
     --background: 240, 100%, 98%; /* Light background (off-white) */
-    --foreground: 240, 10%, 15%; /* Dark text */
+    --foreground: 241, 82%, 17%; /* Dark text */
 
     --card: 255, 255, 255; /* White card */
-    --card-foreground: 240, 10%, 15%; /* Dark text for cards */
+    --card-foreground: 241, 82%, 17%; /* Dark text for cards */
 
     --popover: 255, 255, 255; /* White popover */
-    --popover-foreground: 240, 10%, 15%; /* Dark text for popover */
+    --popover-foreground: 241, 82%, 17%; /* Dark text for popover */
 
     --primary: 205, 70%, 40%; /* Attractive teal */
     --primary-foreground: 255, 255, 255; /* White text for primary buttons */
@@ -28,7 +28,7 @@ body {
     --muted-foreground: 240, 10%, 20%; /* Dark text for muted areas */
 
     --accent: 50, 100%, 50%; /* Bright yellow for accents */
-    --accent-foreground: 240, 10%, 15%; /* Dark text for accent buttons */
+    --accent-foreground: 241, 82%, 17%; /* Dark text for accent buttons */
 
     --destructive: 0, 85%, 50%; /* Bright red for destructive actions */
     --destructive-foreground: 255, 255, 255; /* White text for destructive actions */
@@ -44,9 +44,21 @@ body {
     /* Apply gradient background to body for dark mode */
     body {
       background: hsla(280, 95%, 57%, 1); /* Fallback background */
-      background: linear-gradient(225deg, hsla(280, 95%, 57%, 1) 0%, hsla(193, 90%, 55%, 1) 100%); /* Gradient background */
-      background: -moz-linear-gradient(225deg, hsla(280, 95%, 57%, 1) 0%, hsla(193, 90%, 55%, 1) 100%); /* Firefox gradient */
-      background: -webkit-linear-gradient(deg, hsla(280, 95%, 57%, 1) 0%, hsla(193, 90%, 55%, 1) 100%); /* Safari and Chrome gradient */
+      background: linear-gradient(
+        225deg,
+        hsla(280, 95%, 57%, 1) 0%,
+        hsla(193, 90%, 55%, 1) 100%
+      ); /* Gradient background */
+      background: -moz-linear-gradient(
+        225deg,
+        hsla(280, 95%, 57%, 1) 0%,
+        hsla(193, 90%, 55%, 1) 100%
+      ); /* Firefox gradient */
+      background: -webkit-linear-gradient(
+        deg,
+        hsla(280, 95%, 57%, 1) 0%,
+        hsla(193, 90%, 55%, 1) 100%
+      ); /* Safari and Chrome gradient */
       filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#B429F9", endColorstr="#26C5F3", GradientType=1); /* IE gradient filter */
     }
 

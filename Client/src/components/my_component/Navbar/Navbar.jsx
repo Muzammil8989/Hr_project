@@ -10,7 +10,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Avatar } from "flowbite-react";
-import { FiLogOut, FiUser, FiMail, FiUserCheck } from "react-icons/fi";  // Importing icons
+import { FiLogOut, FiUser, FiMail, FiUserCheck } from "react-icons/fi"; // Importing icons
 
 function Navbar() {
   const dispatch = useDispatch();
@@ -32,7 +32,7 @@ function Navbar() {
 
   return (
     <div>
-      <nav className="mr-40 flex justify-end">
+      <nav className="borer-none mr-40 flex justify-end">
         <DropdownMenu>
           <DropdownMenuTrigger>
             <Avatar
@@ -43,35 +43,37 @@ function Navbar() {
             />
           </DropdownMenuTrigger>
 
-          <DropdownMenuContent className="mr-48 rounded-md bg-[#4E31AA] p-6 shadow-2xl">
+          <DropdownMenuContent
+            className="mr-48 rounded-md p-3 shadow-2xl"
+            style={{ background: "linear-gradient(135deg, #4431AF, #6A4ED2)" }}
+          >
             <div>
               <div className="flex items-center space-x-2">
-                <FiUser className="mr-2 text-xl text-white/80" /> {/* User icon */}
+                <FiUser className="mr-2 text-xl text-white/80" />{" "}
+                {/* User icon */}
                 <h1 className="text-xl font-semibold text-white/80">
                   {user?.name}
                 </h1>
               </div>
               <div className="flex items-center space-x-2">
-                <FiMail className="mr-2 text-xl text-white/70" /> {/* Email icon */}
+                <FiMail className="mr-2 text-xl text-white/70" />{" "}
+                {/* Email icon */}
                 <h5 className="text-base text-white/70">{user?.email}</h5>
               </div>
               <div className="flex items-center space-x-2">
-                <FiUserCheck className="mr-2 text-xl text-white/70" /> {/* Role icon */}
+                <FiUserCheck className="mr-2 text-xl text-white/70" />{" "}
+                {/* Role icon */}
                 <p className="text-base text-white/70">{user?.role}</p>
               </div>
             </div>
-
-            <hr className="my-4 border-white/30" />  {/* Horizontal line */}
-
-          
-              <Button
-                variant="outline"
-                onClick={handleLogout}
-                className="flex items-center"
-              >
-                <FiLogOut className="mr-2" /> Logout  {/* Logout icon */}
-              </Button>
-          
+            <hr className="my-4 border-white/30" /> {/* Horizontal line */}
+            <Button
+              variant="outline"
+              onClick={handleLogout}
+              className="flex items-center"
+            >
+              <FiLogOut className="mr-2" /> Logout {/* Logout icon */}
+            </Button>
           </DropdownMenuContent>
         </DropdownMenu>
       </nav>
