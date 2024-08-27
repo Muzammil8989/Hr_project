@@ -1,10 +1,6 @@
 import React from "react";
 import { Progress } from "antd";
-import {
-  AiOutlineCheckCircle,
-  AiOutlineClockCircle,
-  AiOutlineCloseCircle,
-} from "react-icons/ai";
+
 
 const StatusCard = ({ title, percentage, color, icon: Icon }) => {
   const gradientColors = {
@@ -18,17 +14,18 @@ const StatusCard = ({ title, percentage, color, icon: Icon }) => {
 
   return (
     <div
-      className="relative flex flex-col items-center justify-center rounded-lg p-4 shadow-md"
+      className="flex flex-col items-center justify-center rounded-lg p-4 shadow-md"
       style={{
         background: gradientColors[color],
-        width: "270px",
+        width: "100%", // Change width to 100% for responsiveness
+        maxWidth: "520px", // Set a max width
       }}
     >
       <Icon size={48} className={`text-${color}-500`} />
       <h3 className="mt-2 text-xl font-semibold text-gray-700">{title}</h3>
       <Progress
         type="circle"
-        size={60}
+        size={80}
         percent={percentage}
         strokeColor={color}
         format={(percent) => `${percent}%`}

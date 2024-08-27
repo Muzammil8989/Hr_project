@@ -1,10 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import { FaBriefcase, FaTachometerAlt, FaCog } from "react-icons/fa";
 import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
 import { Button } from "@/components/ui/button";
 import { Menu } from "antd";
-import Dashboard from "@/Pages/Dashboard/Dashboard";
-import JobCard from "../jobsCard/jobCard"; // Import JobCard
 import { motion } from "framer-motion";
 
 const items = [
@@ -30,31 +28,9 @@ const items = [
   },
 ];
 
-function Sidebar() {
-  const [collapsed, setCollapsed] = useState(false);
-  const [selectedKey, setSelectedKey] = useState("1");
-
-  const toggleCollapsed = () => {
-    setCollapsed(!collapsed);
-  };
-
-  const renderContent = () => {
-    switch (selectedKey) {
-      case "1":
-        return <Dashboard />;
-      case "2":
-        return <JobCard isSidebarCollapsed={collapsed} />; // Pass the collapsed state
-      case "3":
-        return <Dashboard />;
-      case "4":
-        return <Dashboard />;
-      default:
-        return <Dashboard />;
-    }
-  };
-
+function Sidebar({ collapsed, setCollapsed, setSelectedKey }) {
   return (
-    <div className="flex h-screen">
+    <div className="flex h-screen z-10">
       <motion.div
         className="rounded-br-sm rounded-tr-sm bg-[#4431af] p-4"
         initial={{ width: 64 }}
@@ -79,7 +55,9 @@ function Sidebar() {
             defaultSelectedKeys={["1"]}
             mode="inline"
             inlineCollapsed={collapsed}
-            onSelect={({ key }) => setSelectedKey(key)}
+            onSelect={({ key }) => {
+              setSelectedKey(key);
+            }}
             items={items.map((item) => ({
               key: item.key,
               icon: (
@@ -103,24 +81,6 @@ function Sidebar() {
             className="mt-3 h-[520px] rounded-lg bg-[#7e51d1] p-2 text-white"
           />
         </div>
-      </motion.div>
-      <div className="flex-1 p-4">
-        <Button
-          variant="outline"
-          onClick={toggleCollapsed}
-          className="-mt-2 ml-5 flex items-center text-xl dark:bg-[#7e51d1]"
-        >
-          {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-        </Button>
-      </div>
-      <motion.div
-        className="rounded-lg shadow"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.5 }}
-      >
-        {renderContent()}
       </motion.div>
     </div>
   );
