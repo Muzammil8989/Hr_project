@@ -41,25 +41,29 @@ body {
   }
 
   .dark {
-    /* Apply gradient background to body for dark mode */
     body {
-      background: hsla(280, 95%, 57%, 1); /* Fallback background */
-      background: linear-gradient(
-        225deg,
-        hsla(280, 95%, 57%, 1) 0%,
-        hsla(193, 90%, 55%, 1) 100%
-      ); /* Gradient background */
-      background: -moz-linear-gradient(
-        225deg,
-        hsla(280, 95%, 57%, 1) 0%,
-        hsla(193, 90%, 55%, 1) 100%
-      ); /* Firefox gradient */
-      background: -webkit-linear-gradient(
-        deg,
-        hsla(280, 95%, 57%, 1) 0%,
-        hsla(193, 90%, 55%, 1) 100%
-      ); /* Safari and Chrome gradient */
-      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#B429F9", endColorstr="#26C5F3", GradientType=1); /* IE gradient filter */
+      background-image: linear-gradient(
+        255deg,
+        hsl(249deg 56% 44%) 0%,
+        hsl(249deg 59% 43%) 0%,
+        hsl(249deg 62% 43%) 1%,
+        hsl(249deg 65% 42%) 4%,
+        hsl(249deg 69% 42%) 8%,
+        hsl(249deg 64% 44%) 14%,
+        hsl(249deg 54% 50%) 22%,
+        hsl(249deg 59% 55%) 32%,
+        hsl(249deg 64% 61%) 42%,
+        hsl(249deg 72% 66%) 53%,
+        hsl(249deg 72% 67%) 63%,
+        hsl(249deg 72% 67%) 73%,
+        hsl(249deg 72% 67%) 81%,
+        hsl(249deg 72% 68%) 88%,
+        hsl(249deg 73% 67%) 93%,
+        hsl(249deg 74% 64%) 97%,
+        hsl(249deg 75% 62%) 99%,
+        hsl(249deg 76% 59%) 100%,
+        hsl(249deg 77% 56%) 100%
+      );
     }
 
     --foreground: 210, 80%, 90%; /* Light text */

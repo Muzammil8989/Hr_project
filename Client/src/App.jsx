@@ -17,7 +17,7 @@ function App() {
         </div>
 
         <Design />
-        <div className="">
+        <div className="App">
           <Home />
         </div>
       </div>

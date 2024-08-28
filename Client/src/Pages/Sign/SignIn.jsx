@@ -297,35 +297,7 @@ function SignIn() {
                     </Button>
                   </motion.div>
                 </form>
-                <div className="space-y-4">
-                  <div className="relative">
-                    <div className="absolute inset-0 flex items-center">
-                      <div className="w-28 border-t border-gray-300" />
-                      <div className="absolute right-0 w-28 border-t border-gray-300"></div>
-                    </div>
-                    <div className="relative flex justify-center text-xs uppercase">
-                      <span className="px-2 text-gray-400 text-muted-foreground">
-                        Or continue with
-                      </span>
-                    </div>
-                  </div>
-                  <div className="grid grid-cols-2 gap-4">
-                    <Button
-                      variant="outline"
-                      className="flex items-center justify-center gap-2"
-                    >
-                      <FaGoogle className="h-5 w-5" />
-                      Google
-                    </Button>
-                    <Button
-                      variant="outline"
-                      className="flex items-center justify-center gap-2"
-                    >
-                      <FaLinkedin className="h-5 w-5" />
-                      LinkedIn
-                    </Button>
-                  </div>
-                </div>
+              
                 <div className="text-center text-sm text-muted-foreground">
                   <span className="mr-2">Don’t have an account?</span>
                   <Link to="/SignUp" className="underline underline-offset-4">
