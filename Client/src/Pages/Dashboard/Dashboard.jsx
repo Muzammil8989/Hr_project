@@ -120,6 +120,7 @@ function Dashboard({ isSidebarCollapsed }) {
             onCancel={handleCancel}
             footer={null}
             width={1900}
+            className="custom-modal" 
           >
            <CandidateTable/>
             <Button

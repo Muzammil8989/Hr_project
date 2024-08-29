@@ -163,6 +163,7 @@ const Stepper = () => {
         onCancel={closeModal}
         footer={null}
         width={800}
+        
       >
         <ResumeForm formData={formData} setFormData={setFormData} />
         <div className="mt-4 flex justify-end">

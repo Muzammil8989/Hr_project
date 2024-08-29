@@ -78,7 +78,7 @@ function Sidebar({ collapsed, setCollapsed, setSelectedKey }) {
                 </span>
               ),
             }))}
-            className="mt-3 h-[520px] rounded-lg bg-[#7e51d1] p-2 text-white"
+            className="mt-3 h-[720px] rounded-lg bg-[#7e51d1] p-2 text-white"
           />
         </div>
       </motion.div>

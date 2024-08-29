@@ -3,6 +3,7 @@ import MUIDataTable from "mui-datatables";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 const columns = [
   {
@@ -39,7 +40,7 @@ const columns = [
     name: "Skills",
     options: {
       filter: true,
-      sort: false,
+      sort: true,
       customBodyRender: (value) => (
         <div style={{ textAlign: "center" }}>{value}</div>
       ),
@@ -49,7 +50,7 @@ const columns = [
     name: "Education",
     options: {
       filter: true,
-      sort: false,
+      sort: true,
       customBodyRender: (value) => (
         <div style={{ textAlign: "center" }}>{value}</div>
       ),
@@ -59,7 +60,7 @@ const columns = [
     name: "University",
     options: {
       filter: true,
-      sort: false,
+      sort: true,
       customBodyRender: (value) => (
         <div style={{ textAlign: "center" }}>{value}</div>
       ),
@@ -69,38 +70,49 @@ const columns = [
     name: "Resume",
     options: {
       filter: false,
-      sort: false,
-      customBodyRender: (value) => (
-        <div style={{ textAlign: "center" }}>
-          <Button variant="contained" color="primary" href={value} download>
-            Download Now
-          </Button>
-        </div>
-      ),
+      sort: true,
+      customBodyRender: (value) => {
+        return (
+          <div style={{ textAlign: "center" }}>
+            <Button
+              variant="contained"
+              color="primary"
+              href={value}
+              download
+            >
+              Download Now
+            </Button>
+          </div>
+        );
+      },
     },
   },
   {
     name: "Email Candidate",
     options: {
       filter: false,
-      sort: false,
+      sort: true,
       customBodyRender: (value, tableMeta) => {
-        const resumeScore = data[tableMeta.rowIndex][8]; // Accessing Resume Score for color logic
-        let color = "default";
-        if (resumeScore > 70) {
-          color = "success"; // Green for above 70%
-        } else if (resumeScore >= 50) {
-          color = "warning"; // Yellow for 50% - 70%
+        const resumeScore = tableMeta.rowData[8]; // Resume Score
+        const testScore = tableMeta.rowData[9]; // Test Score
+        const email = tableMeta.rowData[2]; // Email
+
+        let backgroundColor = "";
+
+        if (resumeScore > 70 && testScore > 70) {
+          backgroundColor = "green"; // Green for both above 70%
+        } else if (resumeScore >= 50 || testScore >= 50) {
+          backgroundColor = "yellow"; // Yellow for either score above 50%
         } else {
-          color = "error"; // Red for below 50%
+          backgroundColor = "red"; // Red for both below 50%
         }
 
         return (
           <div style={{ textAlign: "center" }}>
             <Button
               variant="contained"
-              color={color}
-              onClick={() => handleEmailCandidate(value)}
+              style={{ backgroundColor, color: "#212121" }}
+              onClick={() => handleEmailCandidate(email)}
             >
               Send Email
             </Button>
@@ -112,7 +124,7 @@ const columns = [
   {
     name: "Resume Score",
     options: {
-      filter: false,
+      filter: true, // Enable filtering for Resume Score
       sort: true,
       customBodyRender: (value) => (
         <Box display="flex" alignItems="center" justifyContent="center">
@@ -125,7 +137,7 @@ const columns = [
   {
     name: "Test Score",
     options: {
-      filter: false,
+      filter: true, // Enable filtering for Test Score
       sort: true,
       customBodyRender: (value) => (
         <Box display="flex" alignItems="center" justifyContent="center">
@@ -147,8 +159,8 @@ const data = [
     "XYZ University",
     "path/to/resume1.pdf",
     "joe.james@example.com",
-    85,
     90,
+    20,
   ],
   [
     2,
@@ -191,7 +203,50 @@ const data = [
 const options = {
   filterType: "checkbox",
   responsive: "standard",
+  elevation: 0,
+  rowsPerPage: 5,
+  rowsPerPageOptions: [5, 10, 20],
+  downloadOptions: {
+    filename: "candidate_data.csv",
+    separator: ",",
+  },
+  onDownload: (buildHead, buildBody, columns, data) => {
+    return "\uFEFF" + buildHead(columns) + buildBody(data);
+  },
 };
+
+const getMuiThemes = () =>
+  createTheme({
+    typography: {
+      useNextVariants: true,
+    },
+    palette: {
+      background: {
+        default: "#f5f5f5",
+        paper: "#c8b7e8",
+      },
+    },
+    components: {
+      MuiTableCell: {
+        styleOverrides: {
+          head: {
+           
+            backgroundColor: "#f5f5f5",
+            color: "#212121",
+            fontWeight: "bold",
+            padding: "10px 4px",
+          },
+          root: {
+            borderBottom: "1px solid #ccc",
+          },
+          body: {
+            padding: "10px 15px",
+            color: "#212121",
+          },
+        },
+      },
+    },
+  });
 
 const handleEmailCandidate = (email) => {
   // Logic to send email to the candidate
@@ -201,12 +256,14 @@ const handleEmailCandidate = (email) => {
 const CandidateTable = () => {
   return (
     <div className="p-12">
-      <MUIDataTable
-        title={"Candidate List"}
-        data={data}
-        columns={columns}
-        options={options}
-      />
+      <ThemeProvider theme={getMuiThemes()}>
+        <MUIDataTable
+          title={"Candidate List"}
+          data={data}
+          columns={columns}
+          options={options}
+        />
+      </ThemeProvider>
     </div>
   );
 };
